@@ -5,18 +5,26 @@ import { useRouter } from "next/navigation";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const router =useRouter();
+  const router = useRouter();
   const [currentUser, setCurrentUser] = useState(null);
-  const [isAuth,setisAuth]=useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const [loading, setLoading] = useState(true); // NEW
 
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("currentUser"));
-    if (storedUser) setCurrentUser(storedUser);
-    setisAuth(true);
+    const storedAuth = localStorage.getItem("isAuth") === "true";
+
+    if (storedUser && storedAuth) {
+      setCurrentUser(storedUser);
+      setIsAuth(true);
+    } else {
+      setCurrentUser(null);
+      setIsAuth(false);
+    }
+
+    setLoading(false); // Only render children when done
   }, []);
 
-
-  //signup
   const signup = (newUser) => {
     const storedUsers = JSON.parse(localStorage.getItem("currentUsers")) || [];
 
@@ -24,19 +32,18 @@ export const AuthProvider = ({ children }) => {
       (u) => u?.email?.toLowerCase() === newUser.email.toLowerCase()
     );
 
-    if (userExists) {
-      // alert("User already exists. Please login.");
-      return false;
-    }
+    if (userExists) return false;
 
     const updatedUsers = [...storedUsers, newUser];
     localStorage.setItem("currentUsers", JSON.stringify(updatedUsers));
     localStorage.setItem("currentUser", JSON.stringify(newUser));
+    localStorage.setItem("isAuth", "true");
+
     setCurrentUser(newUser);
+    setIsAuth(true);
     return true;
   };
 
-  // Login function
   const login = (email, password) => {
     const storedUsers = JSON.parse(localStorage.getItem("currentUsers")) || [];
 
@@ -46,24 +53,31 @@ export const AuthProvider = ({ children }) => {
         u?.password === password
     );
 
-    if (!matchedUser) {
-      // alert("Invalid credentials.");
-      return false;
-    }
+    if (!matchedUser) return false;
 
     localStorage.setItem("currentUser", JSON.stringify(matchedUser));
+    localStorage.setItem("isAuth", "true");
+
     setCurrentUser(matchedUser);
+    setIsAuth(true);
     return true;
   };
 
   const logout = () => {
     localStorage.removeItem("currentUser");
+    localStorage.setItem("isAuth", "false");
+
+    setCurrentUser(null);s
+    setIsAuth(false);
     router.push("/login");
-    setCurrentUser(null);
   };
 
+  if (loading) return null; // Prevent premature redirect/render
+
   return (
-    <AuthContext.Provider value={{ currentUser, signup, login, logout ,isAuth}}>
+    <AuthContext.Provider
+      value={{ currentUser, signup, login, logout, isAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );
