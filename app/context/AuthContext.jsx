@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("currentUser");
     localStorage.setItem("isAuth", "false");
 
-    setCurrentUser(null);s
+    setCurrentUser(null);
     setIsAuth(false);
     router.push("/login");
   };
