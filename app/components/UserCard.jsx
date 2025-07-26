@@ -5,8 +5,6 @@ import { useUsers } from "../context/UserContext";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-
-
 export default function UserCard({ user }) {
   const {
     bookmarkedUsers,
@@ -19,7 +17,6 @@ export default function UserCard({ user }) {
   const isBookmarked = bookmarkedUsers.includes(user.id);
   const isPromoted = promotedUsers.includes(user.id);
   const router = useRouter();
-
 
   return (
     <div className="rounded-3xl shadow-2xl p-4 bg-[#FAF5EF]  mb-10 mt-5  w-full max-w-xs text-center border hover:scale-105 transition-transform duration-300 ">

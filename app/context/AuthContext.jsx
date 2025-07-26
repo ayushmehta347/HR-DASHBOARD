@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     );
 
     if (!matchedUser) {
-      alert("Invalid credentials.");
+      // alert("Invalid credentials.");
       return false;
     }
 

@@ -56,7 +56,7 @@ export default function LoginPage() {
               Signup
             </a>
           </p>
-          {error && <p className="text-red-700 mt-2 text-center">{error}</p>}
+          {error && <p className="text-orange-600 mt-2 text-center">{error}</p>}
         </form>
       </div>
     </>

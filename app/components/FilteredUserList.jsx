@@ -6,7 +6,6 @@ import FilterInput from "./SearchFilter";
 import { useAuth } from "../context/AuthContext";
 import { useRouter } from "next/navigation";
 
-
 export default function FilteredUserList({ users }) {
   const [searchName, setsearchName] = useState("");
   const [searchEmail, setsearchEmail] = useState("");
@@ -14,51 +13,46 @@ export default function FilteredUserList({ users }) {
   const [filteredDept, setfilteredDept] = useState("All");
   const [filteredRating, setfilteredRating] = useState("All");
 
-
   const router = useRouter();
   const { isAuth } = useAuth();
   useEffect(() => {
     if (!isAuth) router.push("/login");
   }, [isAuth]);
 
-
-const departments = ["All", ...new Set(users.map((u) => u.department))];
+  const departments = ["All", ...new Set(users.map((u) => u.department))];
   // const Ratings = ["All", ...new Set(users.map((u) => u.rating))];
-    const Ratings = [
-      "All",
-      ...[...new Set(users.map((u) => u.rating))].sort((a, b) => a - b),
-    ];
+  const Ratings = [
+    "All",
+    ...[...new Set(users.map((u) => u.rating))].sort((a, b) => a - b),
+  ];
 
-  const loading = useDelayedLoading(500); 
+  const loading = useDelayedLoading(500);
 
+  useEffect(() => {
+    const filtered = users.filter((user) => {
+      const fullName = `${user?.firstName || ""} ${
+        user?.lastName || ""
+      }`.toLowerCase();
+      const matchesName = fullName.startsWith(searchName.toLowerCase());
 
+      const matchedEmail = (user?.email || "")
+        .toLowerCase()
+        .startsWith(searchEmail.toLowerCase());
 
-useEffect(() => {
-  const filtered = users.filter((user) => {
-    const fullName = `${user?.firstName || ""} ${
-      user?.lastName || ""
-    }`.toLowerCase();
-    const matchesName = fullName.startsWith(searchName.toLowerCase());
+      const matchesDept =
+        filteredDept.toLowerCase() === "all" ||
+        (user?.department || "").toLowerCase() === filteredDept.toLowerCase();
 
-    const matchedEmail = (user?.email || "")
-      .toLowerCase()
-      .startsWith(searchEmail.toLowerCase());
+      const matchesRating =
+        filteredRating.toLowerCase() === "all" ||
+        String(user?.rating || "").toLowerCase() ===
+          filteredRating.toLowerCase();
 
-    const matchesDept =
-      filteredDept.toLowerCase() === "all" ||
-      (user?.department || "").toLowerCase() === filteredDept.toLowerCase();
+      return matchesName && matchesDept && matchesRating && matchedEmail;
+    });
 
-    const matchesRating =
-      filteredRating.toLowerCase() === "all" ||
-      String(user?.rating || "").toLowerCase() === filteredRating.toLowerCase();
-
-    return matchesName && matchesDept && matchesRating && matchedEmail;
-  });
-
-  setFilteredUsers(filtered);
-}, [searchName, searchEmail, filteredDept, filteredRating, users]);
-
-
+    setFilteredUsers(filtered);
+  }, [searchName, searchEmail, filteredDept, filteredRating, users]);
 
   return (
     <>
@@ -92,7 +86,7 @@ useEffect(() => {
               onChange={(e) => setfilteredDept(e.target.value)}
               className="px-4 py-2 rounded-xl border w-full text-black dark:text-black"
             >
-              {departments.map((dept,idx) => (
+              {departments.map((dept, idx) => (
                 <option key={idx} value={dept}>
                   {dept}
                 </option>
@@ -110,7 +104,7 @@ useEffect(() => {
               onChange={(e) => setfilteredRating(e.target.value)}
               className="px-4 py-2 rounded-xl border w-full text-black dark:text-black"
             >
-              {Ratings.map((Rating,idx) => (
+              {Ratings.map((Rating, idx) => (
                 <option key={idx} value={Rating} className="bg-white-800">
                   {Rating}
                 </option>
@@ -126,7 +120,7 @@ useEffect(() => {
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 justify-items-center">
               {filteredUsers.length > 0 ? (
-                filteredUsers.map((user,idx) => (
+                filteredUsers.map((user, idx) => (
                   <UserCard key={idx} user={user} />
                 ))
               ) : (

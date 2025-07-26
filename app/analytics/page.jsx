@@ -1,6 +1,5 @@
-
 "use client";
- import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import { Bar, Line } from "react-chartjs-2";
@@ -27,22 +26,18 @@ ChartJS.register(
   Legend
 );
 
-
-
 export default function AnalyticsPage() {
   const { users, bookmarkedUsers } = useUsers();
   const [avgRatings, setAvgRatings] = useState({});
   const [bookmarkTrend, setBookmarkTrend] = useState([]);
 
   const router = useRouter();
-     const { isAuth } = useAuth();
-    useEffect(() => {
-      if (!isAuth)
-        router.push("/login"); 
-    }, [isAuth]);
-  
+  const { isAuth } = useAuth();
+  useEffect(() => {
+    if (!isAuth) router.push("/login");
+  }, [isAuth]);
 
-  const loading = useDelayedLoading(); 
+  const loading = useDelayedLoading();
   //  const [loading, setLoading] = useState(true);
 
   //  useEffect(() => {
@@ -51,7 +46,6 @@ export default function AnalyticsPage() {
   //  }, []);
 
   useEffect(() => {
-    
     const deptRatings = {};
     const deptCounts = {};
 
@@ -67,7 +61,6 @@ export default function AnalyticsPage() {
     }
     setAvgRatings(averages);
 
-    
     setBookmarkTrend([2, 4, 5, 3, 6, 8, bookmarkedUsers.length]);
   }, [users, bookmarkedUsers]);
 
@@ -98,7 +91,7 @@ export default function AnalyticsPage() {
 
   return (
     <div className="p-6 flex flex-col items-center">
-      <h1 className=" font-bold text-black dark:text-white mt-10 mb-10 text-3xl">
+      <h1 className=" font-bold text-black dark:text-white mt-1 mb-10 text-3xl">
         Analytics Dashboard
       </h1>
 

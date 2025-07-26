@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import {AuthProvider} from "./context/AuthContext"
 
 
+
 export const metadata = {
   title: "HR-Dashboard",
   description: "Built with Next.js App Router and Tailwind",

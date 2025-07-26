@@ -10,12 +10,12 @@ export default function SignupPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-useEffect(() => {
-  const savedTheme = localStorage.getItem("theme");
-  if (savedTheme) {
-    document.documentElement.classList.toggle("dark", savedTheme === "dark");
-  }
-}, []);
+// useEffect(() => {
+//   const savedTheme = localStorage.getItem("theme");
+//   if (savedTheme) {
+//     document.documentElement.classList.toggle("dark", savedTheme === "dark");
+//   }
+// }, []);
 
 
   const handleSubmit = (e) => {
@@ -25,7 +25,7 @@ useEffect(() => {
       setError("All fields are required.");
       return;
     }
-    if (form.password.length <= 6) {
+    if (form.password.length < 6) {
       
       setError("Minimum password length should be 6");
       return;
@@ -83,8 +83,8 @@ useEffect(() => {
               Login
             </a>
           </p>
-          {error && <p className="text-red-600 mt-2 text-center">{error}</p>}
-          {message && <p className="text-green-700 mt-2  ml-9">{message}</p>}
+          {error && <p className="text-orange-600 mt-2 text-center">{error}</p>}
+          {message && <p className="text-green-800 dark:text-green-300 mt-2 text-center ml-9">{message}</p>}
         </form>
       </div>
     </>
