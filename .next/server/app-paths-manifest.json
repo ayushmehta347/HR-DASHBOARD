@@ -2,7 +2,6 @@
   "/login/page": "app/login/page.js",
   "/employee/[id]/page": "app/employee/[id]/page.js",
   "/signup/page": "app/signup/page.js",
-  "/analytics/page": "app/analytics/page.js",
   "/page": "app/page.js",
-  "/bookmarked/page": "app/bookmarked/page.js"
+  "/analytics/page": "app/analytics/page.js"
 }

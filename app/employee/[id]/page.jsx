@@ -82,7 +82,7 @@ export default function Page() {
  if ( id > 30) {
    return (
      <div className="text-center dark:text-white text-black text-3xl font-bold mt-10">
-       User with ID : {id} not found.
+       Employee with ID : {id} not found.
      </div>
    );
  }
@@ -94,7 +94,7 @@ export default function Page() {
     <div className="flex flex-col items-center p-6">
       
       <h1 className="text-3xl  font-bold mb-8 text-black dark:text-white">
-        User Details for ID: {id}
+        Employee Details for ID: {id}
       </h1>
       {loading ?(
           <p className="text-black dark:text-white font-bold text-3xl mt-20 animate-pulse ">
