@@ -1,16 +1,9 @@
 "use client";
-import { useUsers } from "./context/UserContext";
-import { useAuth } from "./context/AuthContext"; 
 import FilteredUserList from "./components/FilteredUserList";
-
-
+import { useUsers } from "./context/UserContext";
 export default function HomePage() {
-  const { users } = useUsers();
-  const { user: currentUser } = useAuth(); 
+  const {users} =useUsers();
 
-  // const filteredUsers = users?.filter(
-  //   (user) => user.email !== currentUser?.email
-  // );
 
   return (
     <>

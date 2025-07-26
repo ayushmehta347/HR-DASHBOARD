@@ -1,6 +1,6 @@
 import "./globals.css";
 import { UserProvider } from "./context/UserContext";
-import ThemeToggle from "./components/ThemeToggle"; // adjust path if needed
+import ThemeToggle from "./components/ThemeToggle"; 
 import Navbar from "./components/Navbar";
 import {AuthProvider} from "./context/AuthContext"
 

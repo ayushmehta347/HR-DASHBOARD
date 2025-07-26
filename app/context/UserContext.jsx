@@ -10,7 +10,7 @@ export const UserProvider = ({ children }) => {
   const [bookmarkedUsers, setBookmarkedUsers] = useState([]);
   const [promotedUsers, setPromotedUsers] = useState([]);
 
-  // Fetch users from API or localStorage
+ 
   useEffect(() => {
     const fetchUsers = async () => {
         const cached = localStorage.getItem("users");
@@ -42,7 +42,7 @@ export const UserProvider = ({ children }) => {
     fetchUsers();
   }, []);
 
-  // Load bookmarked users from localStorage on mount
+ //bookmark
   useEffect(() => {
     const storedBookmarks = localStorage.getItem("bookmarkedUsers");
     if (storedBookmarks) {
@@ -50,7 +50,6 @@ export const UserProvider = ({ children }) => {
     }
   }, []);
 
-  // Persist bookmarked users to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("bookmarkedUsers", JSON.stringify(bookmarkedUsers));
   }, [bookmarkedUsers]);

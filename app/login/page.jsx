@@ -9,7 +9,6 @@ export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
 
-  const validateEmail = (email) => /\S+@\S+\.\S+/.test(email);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,10 +16,7 @@ export default function LoginPage() {
       setError("All fields are required.");
       return;
     }
-    if (!validateEmail(form.email)) {
-      setError("Invalid email format.");
-      return;
-    }
+   
 
     const success = login(form.email, form.password);
     if (success) {
@@ -35,6 +31,7 @@ export default function LoginPage() {
       <h2 className="text-xl font-bold mb-4">Login</h2>
       <form onSubmit={handleSubmit}>
         <input
+        type="email"
           placeholder="Email"
           className="w-full p-2 border mb-2 text-black dark-text-black"
           value={form.email}

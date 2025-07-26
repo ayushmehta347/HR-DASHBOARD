@@ -7,7 +7,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const { logout } = useAuth();
 
-  // Hide navbar on login or signin page
+  //hide
   if (pathname === "/login" || pathname === "/signup") return null;
 
   return (

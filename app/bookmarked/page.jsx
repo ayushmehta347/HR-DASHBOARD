@@ -21,7 +21,7 @@ export default function BookmarkPage() {
 
   const { users, bookmarkedUsers } = useUsers();
 
-  const loading = useDelayedLoading(500); // ✅ use the hook here
+  const loading = useDelayedLoading(500); 
 
   //  const [loading, setLoading] = useState(true);
 

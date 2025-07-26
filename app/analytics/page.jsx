@@ -1,4 +1,4 @@
-// app/analytics/page.jsx
+
 "use client";
  import { useRouter } from "next/navigation";
 import { useAuth } from "../context/AuthContext";
@@ -42,8 +42,7 @@ export default function AnalyticsPage() {
     }, [isAuth]);
   
 
-  const loading = useDelayedLoading(); // ✅ use the hook here
-
+  const loading = useDelayedLoading(); 
   //  const [loading, setLoading] = useState(true);
 
   //  useEffect(() => {
@@ -52,7 +51,7 @@ export default function AnalyticsPage() {
   //  }, []);
 
   useEffect(() => {
-    // Group users by department and calculate average ratings
+    
     const deptRatings = {};
     const deptCounts = {};
 
@@ -68,7 +67,7 @@ export default function AnalyticsPage() {
     }
     setAvgRatings(averages);
 
-    // Mocked bookmark trend over 7 days
+    
     setBookmarkTrend([2, 4, 5, 3, 6, 8, bookmarkedUsers.length]);
   }, [users, bookmarkedUsers]);
 

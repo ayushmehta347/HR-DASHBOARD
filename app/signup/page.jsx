@@ -10,10 +10,7 @@ export default function SignupPage() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
 
-  const validateEmail = (email) => {
-    // Simple email regex
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,12 +21,7 @@ export default function SignupPage() {
       return;
     }
 
-    if (!validateEmail(form.email)) {
-      setError("Please enter a valid email address.");
-      setMessage("");
-      return;
-    }
-
+   
     const success = signup({
       name: form.name,
       email: form.email,
@@ -56,6 +48,7 @@ export default function SignupPage() {
           onChange={(e) => setForm({ ...form, name: e.target.value })}
         />
         <input
+        type="email"
           placeholder="Email"
           className="w-full p-2 border mb-2 text-black dark-text-black"
           value={form.email}

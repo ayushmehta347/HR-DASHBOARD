@@ -16,7 +16,7 @@ export default function Page() {
   const router = useRouter();
   const { isAuth } = useAuth();
   useEffect(() => {
-    if (!isAuth) router.push("/login"); // ✅ redirect if not logged in
+    if (!isAuth) router.push("/login"); 
   }, [isAuth]);
 
 
@@ -119,7 +119,6 @@ export default function Page() {
         ))}
       </div>
 
-      {/* Content */}
       <div className="w-full max-w-md rounded-xl shadow-md p-4 bg-[#FAF5EF]  text-center mt-5 ">
         {activeTab === "overview" && (
           <>
